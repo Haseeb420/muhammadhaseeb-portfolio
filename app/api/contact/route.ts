@@ -79,8 +79,8 @@ export async function POST(request: NextRequest) {
   try {
     // 1. Auto-reply to sender (sequential for EmailJS rate limit)
     await emailjs.send(
-      serviceId,
-      templateAutoreply,
+      serviceId!,
+      templateAutoreply!,
       {
         name,
         subject,
@@ -92,14 +92,14 @@ export async function POST(request: NextRequest) {
 
     // 2. Notification to CONTACT_TO
     await emailjs.send(
-      serviceId,
-      templateNotify,
+      serviceId!,
+      templateNotify!,
       {
         name,
         email,
         subject,
         message,
-        to_email: contactTo,
+        to_email: contactTo!,
       },
       options
     );
