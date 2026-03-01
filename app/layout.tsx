@@ -35,7 +35,6 @@ export const metadata: Metadata = {
     siteName: "Muhammad Haseeb Malik | Portfolio",
     type: "profile",
     locale: "en",
-    images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "Muhammad Haseeb Malik - Portfolio" }],
   },
   twitter: {
     card: "summary_large_image",

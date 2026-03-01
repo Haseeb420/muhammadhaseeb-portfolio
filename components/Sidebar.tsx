@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Mail, Phone, MapPin, Linkedin, Github, User, Smartphone } from "lucide-react";
 import type { PortfolioData } from "@/lib/types";
 import { ContactItem } from "./ContactItem";
@@ -7,7 +8,18 @@ export function Sidebar({ userData }: { userData: PortfolioData }) {
     <aside className="w-full lg:w-80 flex flex-col gap-6">
       <div className="bg-[#1e1e1f] border border-[#383839] rounded-3xl p-6 lg:p-8 flex flex-col items-center lg:items-start text-center lg:text-left lg:sticky lg:top-8 shadow-xl">
         <div className="w-32 h-32 lg:w-40 lg:h-40 bg-[#2b2b2c] rounded-3xl flex items-center justify-center mb-6 overflow-hidden relative border border-[#383839]">
-          <User size={80} className="text-[#ffdb70]" />
+          {userData.photo ? (
+            <Image
+              src={userData.photo}
+              alt={userData.name}
+              width={160}
+              height={160}
+              className="w-full h-full object-cover"
+              priority
+            />
+          ) : (
+            <User size={80} className="text-[#ffdb70]" />
+          )}
           <div className="absolute bottom-3 right-3 w-4 h-4 bg-green-500 border-2 border-[#1e1e1f] rounded-full" />
         </div>
 

@@ -48,6 +48,8 @@ export interface PortfolioData {
   name: string;
   /** Alternate names for SEO (e.g. "Muhammad Haseeb", "Haseeb Malik", "Haseeb"). */
   alternateNames?: string[];
+  /** Profile photo path (e.g. "/profile.png"). Shown in sidebar when set. */
+  photo?: string;
   title: string;
   email: string;
   phone: string;
