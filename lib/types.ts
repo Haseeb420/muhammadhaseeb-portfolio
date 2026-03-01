@@ -40,6 +40,8 @@ export interface PortfolioProject {
   title: string;
   category: string;
   url?: string;
+  description?: string;
+  tech?: string[];
 }
 
 export interface PortfolioData {
