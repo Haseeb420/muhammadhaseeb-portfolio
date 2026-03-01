@@ -46,6 +46,8 @@ export interface PortfolioProject {
 
 export interface PortfolioData {
   name: string;
+  /** Alternate names for SEO (e.g. "Muhammad Haseeb", "Haseeb Malik", "Haseeb"). */
+  alternateNames?: string[];
   title: string;
   email: string;
   phone: string;

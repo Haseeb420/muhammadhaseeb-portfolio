@@ -1,7 +1,8 @@
 import type { PortfolioData } from "@/lib/types";
 
 export const userData: PortfolioData = {
-  name: "Muhammad Haseeb",
+  name: "Muhammad Haseeb Malik",
+  alternateNames: ["Muhammad Haseeb", "Haseeb Malik", "Haseeb"],
   title: "Associate Team Lead",
   email: "muhammadhaseebtcf@gmail.com",
   phone: "+92 309 4022674",
