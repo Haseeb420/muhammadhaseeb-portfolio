@@ -76,6 +76,22 @@ export async function POST(request: NextRequest) {
 
   const options = emailjsOptions();
 
+  // EmailJS uses "To Email" from the template; that field must be set to {{to_email}} in the dashboard
+  if (!email?.trim()) {
+    console.error("Contact API: sender email is empty (auto-reply recipient).");
+    return NextResponse.json(
+      { error: "Contact is not configured. Please try again later." },
+      { status: 500 }
+    );
+  }
+  if (!contactTo?.trim()) {
+    console.error("Contact API: CONTACT_TO is empty (notification recipient).");
+    return NextResponse.json(
+      { error: "Contact is not configured. Please try again later." },
+      { status: 500 }
+    );
+  }
+
   try {
     // 1. Auto-reply to sender (sequential for EmailJS rate limit)
     await emailjs.send(
@@ -86,6 +102,7 @@ export async function POST(request: NextRequest) {
         subject,
         message,
         to_email: email,
+        email: email,
       },
       options
     );
@@ -117,6 +134,11 @@ export async function POST(request: NextRequest) {
       console.error(
         "Contact API: EmailJS rejected the request. Enable API for non-browser apps: https://dashboard.emailjs.com/admin/account — then Security → allow non-browser (API) requests."
       );
+    } else if (err && typeof err === "object" && (err as { status?: number }).status === 422) {
+      console.error(
+        "Contact API: EmailJS 'recipients address is empty'. In EmailJS dashboard, set each template's 'To Email' field to {{to_email}}."
+      );
+      console.error("Contact API send error:", err);
     } else {
       console.error("Contact API send error:", err);
     }
