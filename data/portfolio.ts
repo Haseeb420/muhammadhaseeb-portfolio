@@ -11,7 +11,7 @@ export const userData: PortfolioData = {
     github: "https://github.com/muhammadhaseeb",
   },
   summary:
-    "Results-driven Software Engineer with over 3.5 years of experience delivering scalable, high-performance web applications. Skilled in Fullstack development using Ruby on Rails, Python, Django, FastAPI, React, and Next.js, with a proven track record of leading teams and mentoring engineers.",
+    "Results-driven Software Engineer with over 4+ years of experience delivering scalable, high-performance web applications. Skilled in Fullstack development using Ruby on Rails, Python, Django, FastAPI, React, and Next.js, with a proven track record of leading teams and mentoring engineers.",
   services: [
     {
       icon: "Code",
@@ -156,8 +156,20 @@ export const userData: PortfolioData = {
     { name: "Flask", category: "Tools & Technologies" },
   ],
   projects: [
-    { title: "Lingopal.ai", category: "AI & Web App" },
-    { title: "Great Recruiters", category: "Fullstack Platform" },
+    {
+      title: "Lingopal.ai",
+      category: "AI & Web App",
+      description:
+        "Built by AI experts, LingoPal translates millions of data points daily. Used across many industries for accurate speech-to-speech translation, speaker detection, and speaker emotion recognition.",
+      tech: ["Next.js", "TypeScript", "Python", "Fast API", "AWS", "Docker", "Nginx"],
+    },
+    {
+      title: "Great Recruiters",
+      category: "Fullstack Platform",
+      description:
+        "Experience management for recruitment. Maximize growth with real-time reviews down to the desk level: collect reviews, testimonials, resolve issues fast, and get recognized for being great.",
+      tech: ["Ruby on Rails", "Next.js", "Stripe", "Sentry", "Heroku", "Cloudflare"],
+    },
     { title: "Speech Translation Engine", category: "Machine Learning" },
     { title: "Clarafinds", category: "Fullstack Platform", url: "https://www.clarafinds.com/" },
   ],

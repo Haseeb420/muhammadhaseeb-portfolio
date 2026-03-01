@@ -1,6 +1,11 @@
 "use client";
 
-const TABS = ["About", "Resume", "Portfolio", "Contact"] as const;
+const TABS = [
+  "Overview & Analytics",
+  "Career Experience",
+  "Projects & Portfolio",
+  "Contact",
+] as const;
 
 export function Nav({
   activeTab,
@@ -10,23 +15,21 @@ export function Nav({
   setActiveTab: (tab: string) => void;
 }) {
   return (
-    <nav className="bg-[#2b2b2c]/80 backdrop-blur-md border border-[#383839] rounded-2xl md:rounded-bl-3xl md:rounded-tr-3xl md:rounded-tl-none md:rounded-br-none px-6 py-4 mb-8 md:mb-0 md:absolute md:top-0 md:right-0 z-10">
-      <ul className="flex justify-between md:justify-end gap-4 md:gap-8">
-        {TABS.map((tab) => (
-          <li key={tab}>
-            <button
-              type="button"
-              onClick={() => setActiveTab(tab)}
-              className={`text-xs md:text-sm font-semibold transition-colors relative py-1 ${activeTab === tab ? "text-[#ffdb70]" : "text-[#d6d6d6] hover:text-[#d6d6d6]/70"}`}
-            >
-              {tab}
-              {activeTab === tab && (
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#ffdb70] rounded-full" />
-              )}
-            </button>
-          </li>
-        ))}
-      </ul>
+    <nav className="flex overflow-x-auto scrollbar-hide border-b border-[#383839] mb-8 gap-6 md:gap-8 pb-2">
+      {TABS.map((tab) => (
+        <button
+          key={tab}
+          type="button"
+          onClick={() => setActiveTab(tab)}
+          className={`tab-btn text-sm font-bold uppercase tracking-wider pb-2 whitespace-nowrap transition-colors relative ${
+            activeTab === tab
+              ? "text-[#ffdb70] border-b-2 border-[#ffdb70]"
+              : "text-[#d6d6d6] hover:text-white border-b-2 border-transparent"
+          }`}
+        >
+          {tab}
+        </button>
+      ))}
     </nav>
   );
 }
