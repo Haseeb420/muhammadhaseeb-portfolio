@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New contact form submission</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #121212; margin: 0; padding: 0; }
+    .container { max-width: 600px; margin: 20px auto; background-color: #1e1e1f; border: 1px solid #383839; border-radius: 24px; overflow: hidden; }
+    .header { background-color: #1e1e1f; padding: 40px; text-align: left; border-bottom: 1px solid #383839; }
+    .name { color: #ffffff; font-size: 24px; font-weight: bold; margin: 0; }
+    .title { color: #ffdb70; font-size: 14px; letter-spacing: 1px; margin-top: 5px; text-transform: uppercase; }
+    .content { padding: 40px; color: #d6d6d6; line-height: 1.6; }
+    .content h2 { color: #ffffff; font-size: 20px; margin-top: 0; }
+    .highlight { color: #ffdb70; font-weight: 600; }
+    .accent-bar { width: 40px; height: 4px; background-color: #ffdb70; border-radius: 2px; margin-bottom: 20px; }
+    .message-box { background-color: #2b2b2c; border-radius: 12px; padding: 20px; margin-top: 20px; border-left: 3px solid #ffdb70; }
+    .meta { color: #888; font-size: 13px; margin-bottom: 4px; }
+    .meta strong { color: #d6d6d6; }
+    .reply-link { display: inline-block; margin-top: 24px; color: #ffdb70; text-decoration: none; font-weight: bold; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="accent-bar"></div>
+      <p class="name">Portfolio Contact</p>
+      <p class="title">New message</p>
+    </div>
+    <div class="content">
+      <h2>New contact form submission</h2>
+
+      <p class="meta"><strong>From:</strong> {{name}}</p>
+      <p class="meta"><strong>Email:</strong> {{email}}</p>
+      <p class="meta"><strong>Subject:</strong> <span class="highlight">{{subject}}</span></p>
+
+      <div class="message-box">
+        <p style="margin: 0; font-size: 13px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Message:</p>
+        <p style="margin: 0; white-space: pre-wrap;">{{message}}</p>
+      </div>
+
+      <a href="mailto:{{email}}?subject=Re: {{subject}}" class="reply-link">Reply to {{email}}</a>
+    </div>
+  </div>
+</body>
+</html>

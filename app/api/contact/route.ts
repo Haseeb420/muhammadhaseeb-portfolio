@@ -57,8 +57,17 @@ export async function POST(request: NextRequest) {
   const templateNotify = process.env.EMAILJS_TEMPLATE_NOTIFY;
   const contactTo = process.env.CONTACT_TO;
 
-  if (!publicKey || !privateKey || !serviceId || !templateAutoreply || !templateNotify || !contactTo) {
-    console.error("Contact API: Missing EmailJS or CONTACT_TO env vars.");
+  const missing = [
+    !publicKey && "EMAILJS_PUBLIC_KEY",
+    !privateKey && "EMAILJS_PRIVATE_KEY",
+    !serviceId && "EMAILJS_SERVICE_ID",
+    !templateAutoreply && "EMAILJS_TEMPLATE_AUTOREPLY",
+    !templateNotify && "EMAILJS_TEMPLATE_NOTIFY",
+    !contactTo && "CONTACT_TO",
+  ].filter(Boolean) as string[];
+
+  if (missing.length > 0) {
+    console.error("Contact API: Missing env vars:", missing.join(", "));
     return NextResponse.json(
       { error: "Contact is not configured. Please try again later." },
       { status: 500 }
@@ -97,7 +106,21 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("Contact API send error:", err);
+    const isApiDisabled =
+      err &&
+      typeof err === "object" &&
+      "status" in err &&
+      (err as { status: number }).status === 403 &&
+      String((err as { text?: string }).text ?? "").includes("non-browser");
+
+    if (isApiDisabled) {
+      console.error(
+        "Contact API: EmailJS rejected the request. Enable API for non-browser apps: https://dashboard.emailjs.com/admin/account — then Security → allow non-browser (API) requests."
+      );
+    } else {
+      console.error("Contact API send error:", err);
+    }
+
     return NextResponse.json(
       { error: "Failed to send message. Please try again later." },
       { status: 500 }

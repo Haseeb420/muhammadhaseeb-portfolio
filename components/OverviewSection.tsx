@@ -36,7 +36,7 @@ const radarOptions = {
       grid: { color: "rgba(255, 255, 255, 0.1)" },
       pointLabels: {
         color: "#d6d6d6",
-        font: { family: "Inter", size: 12, weight: "bold" },
+        font: { family: "Inter", size: 12, weight: "bold" as const },
       },
       ticks: { display: false, min: 0, max: 100 },
     },

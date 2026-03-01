@@ -31,6 +31,11 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. In [vercel.com](https://vercel.com): **Add New** → **Project** → import your Git provider and select this repo. Leave root directory as `.` and keep the auto-detected Next.js preset.
+2. Before deploying, add **environment variables** in **Project → Settings → Environment Variables**. Required variables are listed in [.env.local.example](.env.local.example):
+   - `EMAILJS_PUBLIC_KEY`, `EMAILJS_PRIVATE_KEY`, `EMAILJS_SERVICE_ID`, `EMAILJS_TEMPLATE_AUTOREPLY`, `EMAILJS_TEMPLATE_NOTIFY`, `CONTACT_TO`
+   - Enable them for **Production** (and **Preview** if you want the contact form on preview deployments).
+3. In [EmailJS Security](https://dashboard.emailjs.com/admin/account), enable **Allow non-browser (API) requests** so the contact API works on Vercel.
+4. Deploy. Pushes to the default branch trigger production deploys; other branches get preview URLs.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
