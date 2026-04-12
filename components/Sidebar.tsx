@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Mail, Phone, MapPin, Linkedin, Github, User, Smartphone } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Github, User, Smartphone, FileDown } from "lucide-react";
 import type { PortfolioData } from "@/lib/types";
 import { ContactItem } from "./ContactItem";
 
@@ -7,30 +7,36 @@ export function Sidebar({ userData }: { userData: PortfolioData }) {
   return (
     <aside className="w-full lg:w-80 flex flex-col gap-6">
       <div className="bg-[#1e1e1f] border border-[#383839] rounded-3xl p-6 lg:p-8 flex flex-col items-center lg:items-start text-center lg:text-left lg:sticky lg:top-8 shadow-xl">
-        <div className="w-32 h-32 lg:w-40 lg:h-40 bg-[#2b2b2c] rounded-3xl flex items-center justify-center mb-6 overflow-hidden relative border border-[#383839]">
-          {userData.photo ? (
-            <Image
-              src={userData.photo}
-              alt={userData.name}
-              width={160}
-              height={160}
-              className="w-full h-full object-cover"
-              priority
-            />
-          ) : (
-            <User size={80} className="text-[#ffdb70]" />
-          )}
-          <div className="absolute bottom-3 right-3 w-4 h-4 bg-green-500 border-2 border-[#1e1e1f] rounded-full" />
+        <div className="flex w-full flex-col items-center gap-4 mb-6 lg:items-start">
+          <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-3xl border border-[#383839] bg-[#2b2b2c] lg:h-40 lg:w-40">
+            {userData.photo ? (
+              <Image
+                src={userData.photo}
+                alt={userData.name}
+                width={160}
+                height={160}
+                className="h-full w-full object-cover"
+                priority
+              />
+            ) : (
+              <User size={80} className="text-[#ffdb70]" />
+            )}
+            <div className="absolute bottom-3 right-3 h-4 w-4 rounded-full border-2 border-[#1e1e1f] bg-green-500" />
+          </div>
+
+          <div className="w-full text-center lg:text-left">
+            <h1 className="mb-2 text-2xl font-semibold text-white lg:text-3xl">
+              {userData.name}
+            </h1>
+            <div className="flex justify-center lg:justify-start">
+              <span className="inline-block rounded-xl border border-[#383839] bg-[#2b2b2c] px-4 py-1.5 text-xs font-medium text-[#ffdb70] lg:text-sm">
+                {userData.title}
+              </span>
+            </div>
+          </div>
         </div>
 
-        <div className="lg:hidden mb-6">
-          <h1 className="text-2xl font-semibold text-white mb-2">{userData.name}</h1>
-          <span className="bg-[#2b2b2c] text-[#ffdb70] px-4 py-1.5 rounded-xl text-xs font-medium border border-[#383839]">
-            {userData.title}
-          </span>
-        </div>
-
-        <div className="w-full h-[1px] bg-[#383839] mb-8 hidden lg:block" />
+        <div className="mb-8 h-px w-full bg-[#383839]" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 w-full text-left">
           <ContactItem icon={<Mail size={18} />} label="EMAIL" value={userData.email} />
@@ -61,6 +67,17 @@ export function Sidebar({ userData }: { userData: PortfolioData }) {
             <Github size={20} />
           </a>
         </div>
+
+        {userData.resumePdfPath ? (
+          <a
+            href={userData.resumePdfPath}
+            download="Muhammad_Haseeb_Resume.pdf"
+            className="mt-4 w-full flex items-center justify-center gap-2 rounded-xl border border-[#ffdb70]/40 bg-[#2b2b2c] px-4 py-3 text-sm font-bold uppercase tracking-wider text-[#ffdb70] hover:bg-[#ffdb70]/10 hover:border-[#ffdb70] transition-colors"
+          >
+            <FileDown size={18} aria-hidden />
+            Download resume
+          </a>
+        ) : null}
       </div>
     </aside>
   );

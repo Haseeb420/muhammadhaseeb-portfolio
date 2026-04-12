@@ -61,6 +61,8 @@ export interface PortfolioData {
   education: PortfolioEducation[];
   skills: PortfolioSkill[];
   projects: PortfolioProject[];
+  /** Static path under public/, e.g. "/Muhammad_Haseeb_Resume.pdf". When set, sidebar shows Download resume. */
+  resumePdfPath?: string;
 }
 
 export interface ContactRequestBody {
