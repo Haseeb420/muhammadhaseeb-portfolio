@@ -41,18 +41,17 @@ export function PortfolioSection({ projects }: { projects: PortfolioProject[] })
                   </span>
                 ))}
               </div>
-            ) : (
-              project.url && (
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#ffdb70] text-sm font-medium hover:underline mt-auto"
-                >
-                  View project →
-                </a>
-              )
-            )}
+            ) : null}
+            {project.url ? (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#ffdb70] text-sm font-medium hover:underline mt-4"
+              >
+                View project →
+              </a>
+            ) : null}
           </div>
         ))}
       </div>
