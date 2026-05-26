@@ -32,7 +32,7 @@ export default function Home() {
           </div>
 
           <footer className="mt-20 pt-8 border-t border-[#383839] text-[#d6d6d6]/30 text-xs text-center lg:text-left">
-            © 2024 Muhammad Haseeb. All Rights Reserved.
+            © {new Date().getFullYear()} Muhammad Haseeb. All Rights Reserved.
           </footer>
         </main>
       </div>

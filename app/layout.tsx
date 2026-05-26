@@ -19,9 +19,9 @@ const geistMono = Geist_Mono({
 
 const siteTitle = "Muhammad Haseeb Malik | Portfolio";
 const siteDescription =
-  "Muhammad Haseeb Malik (Muhammad Haseeb / Haseeb) — Associate Team Lead (ATL) and Senior Software Engineer. Fullstack with Python, Django, Ruby on Rails, React, Next.js. Based in Lahore, Pakistan.";
+  "Muhammad Haseeb Malik (Muhammad Haseeb) — Principal Software Engineer at WAMO LABS. Fullstack and AI integration: Python, FastAPI, Next.js, TypeScript, Ruby on Rails, Django, AWS, Docker, PostgreSQL. Lahore, Pakistan.";
 const keywords =
-  "Muhammad Haseeb Malik, Muhammad Haseeb, Haseeb Malik, Haseeb, Associate Team Lead, ATL, Senior Software Engineer, SSE, Software Engineer, Python, Django, FastAPI, React, Next.js, Ruby on Rails, Lahore, Fullstack developer";
+  "Muhammad Haseeb Malik, Muhammad Haseeb, Haseeb Malik, Haseeb, Principal Software Engineer, Senior Software Engineer, WAMO LABS, Python, FastAPI, Next.js, TypeScript, Ruby on Rails, Django, AWS, Docker, PostgreSQL, AI, Lahore, Fullstack developer";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),

@@ -11,9 +11,9 @@ export function SeoKeywordSnippet() {
   return (
     <section aria-hidden="true" className="sr-only">
       <p>
-        {names}. {userData.title}, Associate Team Lead, Senior Software Engineer.
-        {userData.location}. Python, Django, FastAPI, React, Next.js, Ruby on
-        Rails. {skills}.
+        {names}. {userData.title}. Senior Software Engineer, Software Engineer.{" "}
+        {userData.location}. Python, FastAPI, Next.js, TypeScript, Ruby on Rails,
+        Django, AWS, Docker, PostgreSQL. {skills}.
       </p>
     </section>
   );
