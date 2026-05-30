@@ -1,0 +1,76 @@
+name: Obfuscation Scan
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  scan:
+    name: Detect obfuscated / malicious code
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for obfuscation patterns
+        run: |
+          # Patterns that have no legitimate use in this codebase:
+          #   String.fromCharCode   – runtime char-code construction (classic obfuscation)
+          #   _$_<alphanum>         – generated mangled variable names
+          #   global[<expr>]=require – hijacking Node's require via bracket notation
+          #   createRequire appended to a config file (postcss / next / tailwind)
+          PATTERNS=(
+            'String\.fromCharCode'
+            '_\$_[a-zA-Z0-9]'
+            'global\[.*\]=.*require'
+            'global\[.*\]= *require'
+          )
+
+          INCLUDE_FLAGS=(
+            --include="*.ts"
+            --include="*.tsx"
+            --include="*.js"
+            --include="*.mjs"
+            --include="*.cjs"
+          )
+
+          FOUND=0
+          for pattern in "${PATTERNS[@]}"; do
+            matches=$(grep -rn "$pattern" \
+              "${INCLUDE_FLAGS[@]}" \
+              --exclude-dir=node_modules \
+              --exclude-dir=.next \
+              . 2>/dev/null || true)
+            if [ -n "$matches" ]; then
+              echo "SUSPICIOUS PATTERN DETECTED: $pattern"
+              echo "$matches"
+              echo ""
+              FOUND=1
+            fi
+          done
+
+          # Flag any source file that has a line longer than 500 chars (obfuscated
+          # payloads are always a single very long line hidden after normal code).
+          long_lines=$(grep -rn '.\{501\}' \
+            "${INCLUDE_FLAGS[@]}" \
+            --exclude-dir=node_modules \
+            --exclude-dir=.next \
+            . 2>/dev/null || true)
+          if [ -n "$long_lines" ]; then
+            echo "SUSPICIOUS: source file contains line(s) longer than 500 characters"
+            echo "$long_lines" | head -20
+            FOUND=1
+          fi
+
+          if [ "$FOUND" -eq 1 ]; then
+            echo ""
+            echo "Security scan failed. Review the matches above before merging."
+            exit 1
+          fi
+
+          echo "Obfuscation scan passed — no suspicious patterns found."
